@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dementia Disease Prediction</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        h1 {
+            font-size: 70px !important;
+        }
+        label, button {
+            font-size: 30px !important;
+        }
+        .error-message {
+            color: red;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .success-message {
+            color: green;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div style="background-image: url('https://mdbcdn.b-cdn.net/img/new/fluid/nature/015.webp'); color: white; font-weight: bold;">
+        <div class="container mt-5">
+            <h1 class="mb-4 text-center bg-dark p-4 text-white" style="border-radius:20px; background: linear-gradient(rgb(24, 112, 116),black);">Dementia Disease Prediction</h1>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="mr">MR_DELAY:</label>
+                    <input type="text" class="form-control" name="mr" required>
+                </div>
+    
+                <div class="form-group">
+                    <label for="age">AGE:</label>
+                    <input type="text" class="form-control" name="age" required>
+                </div>
+    
+                <div class="form-group">
+                    <label for="educ">EDUC:</label>
+                    <input type="text" class="form-control" name="educ" required>
+                </div>
+    
+                <div class="form-group">
+                    <label for="ses">SES:</label>
+                    <input type="text" class="form-control" name="ses" required>
+                </div>
+    
+                <div class="form-group">
+                    <label for="mmse">MMSE:</label>
+                    <input type="text" class="form-control" name="mmse" required>
+                </div>
+    
+                <div class="form-group">
+                    <label for="cdr">CDR:</label>
+                    <input type="text" class="form-control" name="cdr" required>
+                </div>
+    
+                <div class="form-group">
+                    <label for="etiv">eTIV:</label>
+                    <input type="text" class="form-control" name="etiv" required>
+                </div>
+    
+                <div class="form-group">
+                    <label for="nwbv">nWBV:</label>
+                    <input type="text" class="form-control" name="nwbv" required>
+                </div>
+    
+                <div class="form-group">
+                    <label for="asf">ASF:</label>
+                    <input type="text" class="form-control" name="asf" required>
+                </div>
+    
+                <center><button type="submit" class="btn btn-light text-center" style="font-weight: bold;">Predict</button></center>
+            </form>
+    
+            {% if error %}
+                <center><div class="error-message p-4 text-center">{{ error }}</div></center>
+            {% endif %}
+    
+            {% if prediction %}
+                <center>
+                    <div class="success-message p-4" style="width: 70%;">
+                        <h2 class="mt-6 text-center p-4 bg-dark text-white w-100" style="border-radius:20px;">Prediction Result: {{ prediction }}</h2>
+                    </div>
+                </center>
+            {% endif %}
+            
+            {% if graphic %}
+                <center><img src="data:image/png;base64,{{ graphic }}" alt="Feature Distribution"></center>
+            {% endif %}
+        </div>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
